@@ -14,13 +14,11 @@ object Checkout {
 
   def canSell(symbol: Item) = getPriceOption(symbol).isDefined
 
-  def scan(items: Seq[Item]): Int = items.map(priceOf).fold(0)(_ + _) - discountApples(items) - discountOranges(symbol)
+  def scan(items: Seq[Item]): Int = items.map(priceOf).fold(0)(_ + _) - discountApples(items) - discountOranges(items)
 
-  private def discountApples(items: Seq[Item]) = numOfApplePairs(items) * priceOf('apple)
+  private def discountApples = discount('apple, 2)(_)
 
-  private def numOfApplePairs(items: Seq[Item]) = items.count(_ == 'apple) / 2
+  private def discountOranges = discount('orange, 3)(_)
 
-  private def discountOranges(items: Seq[Item]) = numOfOrangesTriples(items) * priceOf('orange)
-
-  private def numOfOrangesTriples(items: Seq[Item]) = items.count(_ == 'orange) / 3
+  private def discount(discountedItem: Item, itemCount: Int)(items: Seq[Item]) = items.count(_ == discountedItem) / itemCount * priceOf(discountedItem)
 }
