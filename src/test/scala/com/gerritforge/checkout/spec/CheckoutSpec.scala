@@ -27,7 +27,20 @@ class CheckoutSpec extends FlatSpec with ShouldMatchers {
     priceOf('orange) should be(25)
   }
 
-  "A checkout till" should "price [Apple, Apple, Orange, Apple ] as £2.05" in {
-    scan(Seq('apple, 'apple, 'orange, 'apple)) should be(205)
+  "A checkout till" should "price [Apple, Apple, Orange, Apple ] as £1.45" in {
+    scan(Seq('apple, 'apple, 'orange, 'apple)) should be(145)
   }
+
+  "A checkout till" should "discount Apples at 50% on multiples of 2" in {
+    scan(Seq('apple, 'apple)) should be(60)
+  }
+
+  it should "not apply 50% discount on a single Apple" in {
+    scan(Seq('apple, 'apple)) should be(60)
+  }
+
+  it should "not apply 50% discount on oranges" in {
+    scan(Seq('apple, 'orange, 'orange)) should be (110)
+  }
+
 }

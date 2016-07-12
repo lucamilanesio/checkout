@@ -14,5 +14,9 @@ object Checkout {
 
   def canSell(symbol: Item) = getPriceOption(symbol).isDefined
 
-  def scan(symbol: Seq[Symbol]): Int = symbol.map(priceOf).fold(0)(_ + _)
+  def scan(items: Seq[Item]): Int = items.map(priceOf).fold(0)(_ + _) - discountApples(items)
+
+  private def discountApples(items: Seq[Item]) = numOfApplePairs(items) * priceOf('apple)
+
+  private def numOfApplePairs(items: Seq[Item]) = items.count(_ == 'apple) / 2
 }
