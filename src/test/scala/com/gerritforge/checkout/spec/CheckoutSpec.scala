@@ -26,4 +26,8 @@ class CheckoutSpec extends FlatSpec with ShouldMatchers {
   "An orange" should "cost 25p" in {
     priceOf('orange) should be(25)
   }
+
+  "A checkout till" should "price [Apple, Apple, Orange, Apple ] as £2.05" in {
+    scan(Seq('apple, 'apple, 'orange, 'apple)) should be(205)
+  }
 }

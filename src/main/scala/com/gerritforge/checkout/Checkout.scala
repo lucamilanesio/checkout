@@ -13,4 +13,6 @@ object Checkout {
   }
 
   def canSell(symbol: Item) = getPriceOption(symbol).isDefined
+
+  def scan(symbol: Seq[Symbol]): Int = symbol.map(priceOf).fold(0)(_ + _)
 }
