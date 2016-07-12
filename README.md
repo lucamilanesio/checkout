@@ -29,7 +29,7 @@ SBT 0.13.x
 The Shop's Checkout is implemented with a class object called com.gerritforge.checkout.Checkout.
 In order to use the Checkout simply import all its methods and use them.
 
-The Checkout entrypoint is the scan() function which takes a variable number of symbols and return the
+The Checkout entrypoint is the scan() function which takes a sequence of symbols and returns the
 total price.
 
 Example:
