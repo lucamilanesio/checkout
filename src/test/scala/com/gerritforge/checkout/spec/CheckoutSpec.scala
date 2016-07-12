@@ -43,4 +43,12 @@ class CheckoutSpec extends FlatSpec with ShouldMatchers {
     scan(Seq('apple, 'orange, 'orange)) should be (110)
   }
 
+  "A checkout till" should "discount Oranges at 3 for the price of 2" in {
+    scan(Seq('orange, 'orange, 'orange)) should be(50)
+  }
+
+  it should "not apply discounts if buying only two oranges" in {
+    scan(Seq('orange, 'orange)) should be (50)
+  }
+
 }
